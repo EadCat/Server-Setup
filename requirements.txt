@@ -1,0 +1,10 @@
+# Python dependencies required for development
+future
+numpy
+pyyaml
+requests
+setuptools
+six
+termcolor
+ninja
+tqdm

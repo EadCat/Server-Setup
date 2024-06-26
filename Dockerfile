@@ -62,3 +62,7 @@ RUN conda init zsh
 RUN wget https://raw.githubusercontent.com/EadCat/Server-Setup/master/bullet-train.zsh-theme -O ${ZSH_CUSTOM:-/root/.oh-my-zsh/custom}/themes/bullet-train.zsh-theme
 RUN wget https://raw.githubusercontent.com/EadCat/Server-Setup/master/.condarc -O ~/.condarc
 
+# CUDA Compiler 11.8 ENV Setup
+RUN echo 'export PATH="/usr/local/cuda-11.8/bin:$PATH"' >> ~/.zshrc
+RUN echo 'export LD_LIBRARY_PATH="/usr/local/cuda-11.8/lib64:$LD_LIBRARY_PATH"' >> ~/.zshrc
+

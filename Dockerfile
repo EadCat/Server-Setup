@@ -33,12 +33,16 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y zsh && \
 RUN wget https://raw.githubusercontent.com/caiogondim/bullet-train.zsh/master/bullet-train.zsh-theme -O /root/.oh-my-zsh/custom/themes/bullet-train.zsh-theme
 RUN sed -i 's/robbyrussell/bullet-train/g' ~/.zshrc
 
+# ZSH Extensions
 RUN git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-/root/.oh-my-zsh/custom}/plugins/zsh-autosuggestions --depth=1
 RUN git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-/root/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting --depth=1
 RUN sed -i 's/(git)/(git zsh-autosuggestions zsh-syntax-highlighting)/g' ~/.zshrc
 
-# RUN git clone https://github.com/wting/autojump.git /opt/autojump
-# RUN /bin/zsh -c "cd /opt/autojump && ./install.py"
+RUN cd $HOME && git clone https://github.com/wting/autojump.git
+RUN echo 'export SHELL="zsh"' >> ~/.zshrc
+RUN cd autojump && python install.py
+RUN echo '[[ -s /root/.autojump/etc/profile.d/autojump.sh ]] && source /root/.autojump/etc/profile.d/autojump.sh' >> ~/.zshrc
+RUN echo 'autoload -U compinit && compinit -u' >> ~/.zshrc
 
 COPY requirements.txt .
 

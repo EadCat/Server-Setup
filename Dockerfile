@@ -19,6 +19,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
          vim \
          libpng-dev \
          fonts-powerline \
+         unzip \
+         ffmpeg \
+         python3 \
+         python3-dev \
+         python3-pip \
+         python3-setuptools \
+         pkg-config \
+         software-properties-common \
          libgl1-mesa-glx \
          libglib2.0-0 && \
      rm -rf /var/lib/apt/lists/*
@@ -39,8 +47,9 @@ RUN git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUS
 RUN sed -i 's/(git)/(git zsh-autosuggestions zsh-syntax-highlighting)/g' ~/.zshrc
 
 RUN cd $HOME && git clone https://github.com/wting/autojump.git
+ENV SHELL zsh
 RUN echo 'export SHELL="zsh"' >> ~/.zshrc
-RUN cd autojump && python install.py
+RUN cd $HOME/autojump && python3 install.py
 RUN echo '[[ -s /root/.autojump/etc/profile.d/autojump.sh ]] && source /root/.autojump/etc/profile.d/autojump.sh' >> ~/.zshrc
 RUN echo 'autoload -U compinit && compinit -u' >> ~/.zshrc
 

@@ -18,7 +18,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
          libjpeg-dev \
          vim \
          libpng-dev \
-         fonts-powerline && \
+         fonts-powerline \
+         libgl1-mesa-glx \
+         libglib2.0-0 && \
      rm -rf /var/lib/apt/lists/*
 
 RUN /usr/sbin/update-ccache-symlinks
